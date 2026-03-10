@@ -4,6 +4,30 @@
 
 @section('styles')
 <style>
+    :root {
+      --page-bg: #f4f7fb;
+      --surface: #ffffff;
+      --surface-alt: #f8fbff;
+      --ink-strong: #0f172a;
+      --ink: #334155;
+      --ink-soft: #64748b;
+      --line: #dbe4ee;
+      --line-strong: #c9d7e6;
+      --brand: #2563eb;
+      --brand-2: #0f172a;
+      --accent: #0ea5e9;
+      --success: #10b981;
+      --shadow-soft: 0 12px 32px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 28px 60px rgba(15, 23, 42, 0.14);
+    }
+
+    body {
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.06), transparent 32%),
+        linear-gradient(180deg, #f8fbff 0%, var(--page-bg) 100%);
+      color: var(--ink);
+    }
+
     /* ANIMATIONS */
     @keyframes fadeInUp {
       from {
@@ -68,6 +92,18 @@
       background: radial-gradient(circle at 86% 18%, rgba(59, 130, 246, 0.18) 0%, transparent 38%),
                   radial-gradient(circle at 14% 82%, rgba(16, 185, 129, 0.14) 0%, transparent 42%);
       animation: float 6s ease-in-out infinite;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.7), transparent 85%);
+      pointer-events: none;
     }
 
     .hero-content {
@@ -315,6 +351,22 @@
       letter-spacing: 0.04em;
     }
 
+    .hero-note {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+    }
+
+    .hero-note::before {
+      content: '';
+      width: 40px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(96, 165, 250, 0.1), rgba(96, 165, 250, 0.9));
+    }
+
     @media (min-width: 768px) {
       .hero-cta {
         flex-direction: row;
@@ -324,8 +376,8 @@
 
     /* FEATURES/BASIC SECTION - MOBILE FIRST */
     .basic-1 {
-      padding: 40px 20px;
-      background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
+      padding: 56px 20px;
+      background: transparent;
       position: relative;
     }
 
@@ -357,12 +409,192 @@
 
     .basic-1 p {
       font-size: 0.95rem;
-      color: #475569;
+      color: var(--ink);
       line-height: 1.9;
       margin-bottom: 20px;
       position: relative;
       z-index: 1;
       animation: fadeInUp 0.8s ease-out 0.1s both;
+    }
+
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--brand);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .section-kicker::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: currentColor;
+    }
+
+    .insight-panel {
+      background: linear-gradient(165deg, #ffffff 0%, #f2f8ff 100%);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .insight-panel::before {
+      content: '';
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(14, 165, 233, 0.14) 0%, transparent 70%);
+      top: -80px;
+      right: -60px;
+    }
+
+    .insight-shell {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 16px;
+    }
+
+    .insight-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+
+    .insight-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.08);
+      color: var(--brand);
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .insight-badge::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--success);
+      box-shadow: 0 0 0 5px rgba(16, 185, 129, 0.12);
+    }
+
+    .insight-caption {
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+      font-weight: 600;
+    }
+
+    .insight-chart {
+      background: linear-gradient(180deg, #0f172a 0%, #16253d 100%);
+      border-radius: 20px;
+      padding: 20px;
+      min-height: 260px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .insight-figure {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .insight-value strong {
+      display: block;
+      color: #f8fafc;
+      font-size: 2rem;
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .insight-value span {
+      color: #94a3b8;
+      font-size: 0.88rem;
+    }
+
+    .insight-pill {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.16);
+      color: #a7f3d0;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .insight-bars {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      align-items: end;
+      gap: 10px;
+      min-height: 130px;
+    }
+
+    .insight-bars span {
+      display: block;
+      border-radius: 999px 999px 10px 10px;
+      background: linear-gradient(180deg, #38bdf8 0%, #2563eb 100%);
+      box-shadow: 0 10px 18px rgba(37, 99, 235, 0.22);
+    }
+
+    .insight-summary {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .insight-card {
+      background: var(--surface);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    .insight-card strong {
+      display: block;
+      color: var(--ink-strong);
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    .insight-card span {
+      display: block;
+      color: var(--ink-soft);
+      font-size: 0.84rem;
+      line-height: 1.5;
+    }
+
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--ink-strong);
+      font-weight: 700;
+      margin-top: 4px;
+    }
+
+    .text-link:hover {
+      color: var(--brand);
     }
 
     /* Tablet screens */
@@ -379,6 +611,14 @@
       .basic-1 p {
         font-size: 1.02rem;
       }
+
+      .insight-panel {
+        padding: 28px;
+      }
+
+      .insight-chart {
+        min-height: 320px;
+      }
     }
 
     /* Desktop screens */
@@ -394,6 +634,104 @@
       .basic-1 p {
         font-size: 1.05rem;
       }
+    }
+
+    .benefits-section {
+      padding: 88px 0;
+      position: relative;
+    }
+
+    .benefits-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 82% 22%, rgba(37, 99, 235, 0.08), transparent 26%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(248, 250, 252, 0.8) 100%);
+      pointer-events: none;
+    }
+
+    .section-head {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 40px;
+    }
+
+    .section-head h2 {
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: var(--ink-strong);
+      margin-bottom: 12px;
+      letter-spacing: -0.03em;
+    }
+
+    .section-head p {
+      color: var(--ink-soft);
+      font-size: 1.02rem;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    .benefit-card {
+      position: relative;
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .benefit-card::before {
+      content: '';
+      position: absolute;
+      inset: 0 auto auto 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--brand), var(--accent));
+      opacity: 0.85;
+    }
+
+    .benefit-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(37, 99, 235, 0.28);
+    }
+
+    .benefit-icon {
+      width: 62px;
+      height: 62px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      color: var(--brand);
+      margin-bottom: 18px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    .benefit-card h3 {
+      font-size: 1.18rem;
+      font-weight: 700;
+      color: var(--ink-strong);
+      margin-bottom: 10px;
+    }
+
+    .benefit-card p {
+      color: var(--ink-soft);
+      line-height: 1.7;
+      margin-bottom: 0;
+      font-size: 0.96rem;
+    }
+
+    .transactions-section {
+      background: transparent;
+      padding: 56px 20px 88px;
+      position: relative;
     }
 
     /* FEATURE CARDS */
@@ -463,20 +801,12 @@
     }
 
     /* TRANSACTIONS SECTION - MOBILE FIRST */
-    .transactions-section {
-      background: white;
-      padding: 40px 20px;
-      position: relative;
-    }
-
     .transactions-section::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #3B82F6 0%, #2563EB 50%, #3B82F6 100%);
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.2), transparent 30%);
+      pointer-events: none;
     }
 
     .card-header {
@@ -484,6 +814,69 @@
       color: white !important;
       padding: 12px 16px !important;
       font-size: 0.95rem;
+    }
+
+    .transactions-shell {
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+    }
+
+    .transactions-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+      background: linear-gradient(180deg, rgba(248, 250, 252, 0.9) 0%, rgba(255, 255, 255, 0.98) 100%);
+    }
+
+    .transactions-meta span {
+      color: var(--ink-soft);
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    @media (max-width: 767.98px) {
+      .transactions-meta {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .insight-summary {
+        grid-template-columns: 1fr;
+      }
+
+      .insight-topbar,
+      .insight-figure {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    .status-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--ink-strong);
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.08);
+    }
+
+    .status-chip::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--success);
+      box-shadow: 0 0 0 5px rgba(16, 185, 129, 0.1);
     }
 
     .table {
@@ -536,12 +929,16 @@
       .badge {
         font-size: 0.8rem;
       }
+
+      .section-head h2 {
+        font-size: 2.6rem;
+      }
     }
 
     /* Desktop screens */
     @media (min-width: 1024px) {
       .transactions-section {
-        padding: 80px 0;
+        padding: 72px 0 110px;
       }
 
       .table {
@@ -810,6 +1207,7 @@
                             <span>Market Monitoring</span>
                         </li>
                     </ul>
+                    <div class="hero-note">Structured for disciplined investors who want clarity, speed, and control.</div>
                 </div>
             </div>
             <div class="col-lg-6">
@@ -829,78 +1227,67 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6 mb-4 mb-lg-0">
-                <svg class="img-fluid rounded-3" viewBox="0 0 520 420" style="background: linear-gradient(135deg, #1E293B 0%, #334155 100%); border-radius: 12px;" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Background grid -->
-                    <defs>
-                        <pattern id="grid2" width="40" height="40" patternUnits="userSpaceOnUse">
-                            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(168, 85, 247, 0.1)" stroke-width="1"/>
-                        </pattern>
-                    </defs>
-                    <rect width="520" height="420" fill="url(#grid2)" />
-
-                    <!-- Wallet illustration -->
-                    <g transform="translate(160, 80)">
-                        <!-- Wallet main body -->
-                        <rect x="0" y="40" width="200" height="120" rx="12" fill="none" stroke="#A855F7" stroke-width="2"/>
-
-                        <!-- Wallet flap -->
-                        <path d="M 0 40 Q 100 0 200 40" fill="none" stroke="#A855F7" stroke-width="2"/>
-
-                        <!-- Coins visualization -->
-                        <circle cx="50" cy="100" r="28" fill="rgba(251, 191, 36, 0.2)" stroke="#FBbF24" stroke-width="2"/>
-                        <circle cx="50" cy="100" r="20" fill="none" stroke="#FBbF24" stroke-width="1"/>
-                        <text x="50" y="105" font-size="16" font-weight="bold" fill="#FBbF24" text-anchor="middle">B</text>
-
-                        <circle cx="130" cy="85" r="28" fill="rgba(59, 130, 246, 0.2)" stroke="#3B82F6" stroke-width="2"/>
-                        <circle cx="130" cy="85" r="20" fill="none" stroke="#3B82F6" stroke-width="1"/>
-                        <text x="130" y="90" font-size="16" font-weight="bold" fill="#3B82F6" text-anchor="middle">E</text>
-
-                        <circle cx="100" cy="130" r="28" fill="rgba(34, 197, 94, 0.2)" stroke="#22C55E" stroke-width="2"/>
-                        <circle cx="100" cy="130" r="20" fill="none" stroke="#22C55E" stroke-width="1"/>
-                        <text x="100" y="135" font-size="16" font-weight="bold" fill="#22C55E" text-anchor="middle">$</text>
-                    </g>
-
-                    <!-- Features list -->
-                    <g transform="translate(50, 260)">
-                        <g>
-                            <circle cx="10" cy="10" r="5" fill="#3B82F6" />
-                            <text x="25" y="14" font-size="14" fill="#F8FAFC">Multi-Chain Support</text>
-                        </g>
-                        <g transform="translate(0, 35)">
-                            <circle cx="10" cy="10" r="5" fill="#10B981" />
-                            <text x="25" y="14" font-size="14" fill="#F8FAFC">Real-Time Analytics</text>
-                        </g>
-                        <g transform="translate(0, 70)">
-                            <circle cx="10" cy="10" r="5" fill="#A855F7" />
-                            <text x="25" y="14" font-size="14" fill="#F8FAFC">Advanced Security</text>
-                        </g>
-                    </g>
-                </svg>
+                <div class="insight-panel">
+                    <div class="insight-shell">
+                        <div class="insight-topbar">
+                            <span class="insight-badge">Performance Snapshot</span>
+                            <span class="insight-caption">Updated every market cycle</span>
+                        </div>
+                        <div class="insight-chart">
+                            <div class="insight-figure">
+                                <div class="insight-value">
+                                    <strong>18.4%</strong>
+                                    <span>30-day portfolio growth</span>
+                                </div>
+                                <span class="insight-pill">Risk score: Balanced</span>
+                            </div>
+                            <div class="insight-bars" aria-hidden="true">
+                                <span style="height: 38%;"></span>
+                                <span style="height: 52%;"></span>
+                                <span style="height: 64%;"></span>
+                                <span style="height: 58%;"></span>
+                                <span style="height: 82%;"></span>
+                                <span style="height: 74%;"></span>
+                            </div>
+                        </div>
+                        <div class="insight-summary">
+                            <div class="insight-card">
+                                <strong>12 Chains</strong>
+                                <span>Coverage across major networks with one portfolio view.</span>
+                            </div>
+                            <div class="insight-card">
+                                <strong>Smart Alerts</strong>
+                                <span>Receive timely actions before market noise becomes risk.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-lg-6 ps-lg-4">
+                <span class="section-kicker">Built For Precision</span>
                 <h2>Why Choose PRISM?</h2>
                 <p>PRISM combines cutting-edge blockchain technology with professional-grade portfolio management tools. Our platform gives you complete control over your digital assets with transparent, real-time insights.</p>
                 <p>With multi-chain support, advanced security features, and a user-friendly interface, PRISM is built for both beginners and seasoned crypto professionals.</p>
                 <p>Experience seamless wallet integration, automated portfolio tracking, and intelligent market insights all in one place.</p>
-                <a href="#transactions" class="btn btn-primary" style="background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%); border: none; padding: 13px 38px; border-radius: 8px; font-weight: 600;">Learn More</a>
+                <a href="#transactions" class="text-link">See live platform activity <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
     </div>
 </section>
 
-<section style="background: white; padding: 100px 0; border-top: 1px solid #E2E8F0;">
+<section class="benefits-section">
     <div class="container">
-        <div class="row justify-content-center mb-5">
-            <div class="col-lg-8 text-center">
-                <h2 style="font-size: 2.5rem; font-weight: 800; color: #0F172A; margin-bottom: 20px;">Why PRISM Stands Out</h2>
-                <p style="font-size: 1.1rem; color: #475569;">Enterprise-grade features designed for modern investors</p>
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center section-head">
+                <span class="section-kicker justify-content-center">Platform Benefits</span>
+                <h2>Why PRISM Stands Out</h2>
+                <p>Enterprise-grade capabilities presented in a cleaner, calmer interface for serious portfolio oversight.</p>
             </div>
         </div>
         <div class="row">
-            <!-- Security Feature -->
             <div class="col-md-6 col-lg-4 mb-4">
-                <div style="background: white; border-radius: 12px; padding: 30px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); border: 1px solid #E2E8F0; transition: all 0.3s ease; height: 100%;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 15px 40px rgba(0, 0, 0, 0.12)'; this.style.borderColor='#3B82F6';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(0, 0, 0, 0.08)'; this.style.borderColor='#E2E8F0';">
-                    <div style="width: 60px; height: 60px; margin-bottom: 20px;">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" style="width: 100%; height: 100%; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));">
                             <defs>
                                 <linearGradient id="secGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -912,16 +1299,14 @@
                             <path d="M32 16V8l-16 6v12c0 12 16 16 16 16s16-4 16-16V14l-16-6v8z" fill="white" opacity="0.9"/>
                         </svg>
                     </div>
-                    <div style="width: 4px; height: 40px; background: linear-gradient(135deg, #3B82F6, #A855F7); border-radius: 2px; margin-bottom: 15px;"></div>
-                    <h3 style="font-size: 1.25rem; font-weight: 700; color: #0F172A; margin-bottom: 12px;">Bank-Level Security</h3>
-                    <p style="color: #6B7280; line-height: 1.6; font-size: 0.95rem;">Military-grade encryption and multi-signature wallets protect your assets with enterprise-level security protocols.</p>
+                    <h3>Bank-Level Security</h3>
+                    <p>Military-grade encryption and multi-signature wallets protect your assets with enterprise-level security protocols.</p>
                 </div>
             </div>
 
-            <!-- Analytics Feature -->
             <div class="col-md-6 col-lg-4 mb-4">
-                <div style="background: white; border-radius: 12px; padding: 30px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); border: 1px solid #E2E8F0; transition: all 0.3s ease; height: 100%;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 15px 40px rgba(0, 0, 0, 0.12)'; this.style.borderColor='#3B82F6';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(0, 0, 0, 0.08)'; this.style.borderColor='#E2E8F0';">
-                    <div style="width: 60px; height: 60px; margin-bottom: 20px;">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" style="width: 100%; height: 100%; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));">
                             <defs>
                                 <linearGradient id="analyticGrad1" x1="0%" y1="100%" x2="100%" y2="0%">
@@ -936,16 +1321,14 @@
                             <line x1="8" y1="58" x2="56" y2="58" stroke="url(#analyticGrad1)" stroke-width="2"/>
                         </svg>
                     </div>
-                    <div style="width: 4px; height: 40px; background: linear-gradient(135deg, #3B82F6, #A855F7); border-radius: 2px; margin-bottom: 15px;"></div>
-                    <h3 style="font-size: 1.25rem; font-weight: 700; color: #0F172A; margin-bottom: 12px;">Advanced Analytics</h3>
-                    <p style="color: #6B7280; line-height: 1.6; font-size: 0.95rem;">Real-time insights and predictive analysis powered by AI to optimize your portfolio performance.</p>
+                    <h3>Advanced Analytics</h3>
+                    <p>Real-time insights and predictive analysis powered by AI to optimize your portfolio performance.</p>
                 </div>
             </div>
 
-            <!-- Speed Feature -->
             <div class="col-md-6 col-lg-4 mb-4">
-                <div style="background: white; border-radius: 12px; padding: 30px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); border: 1px solid #E2E8F0; transition: all 0.3s ease; height: 100%;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 15px 40px rgba(0, 0, 0, 0.12)'; this.style.borderColor='#3B82F6';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(0, 0, 0, 0.08)'; this.style.borderColor='#E2E8F0';">
-                    <div style="width: 60px; height: 60px; margin-bottom: 20px;">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" style="width: 100%; height: 100%; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));">
                             <defs>
                                 <linearGradient id="speedGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -959,16 +1342,14 @@
                             <circle cx="32" cy="32" r="4" fill="url(#speedGrad1)"/>
                         </svg>
                     </div>
-                    <div style="width: 4px; height: 40px; background: linear-gradient(135deg, #3B82F6, #A855F7); border-radius: 2px; margin-bottom: 15px;"></div>
-                    <h3 style="font-size: 1.25rem; font-weight: 700; color: #0F172A; margin-bottom: 12px;">Lightning Fast</h3>
-                    <p style="color: #6B7280; line-height: 1.6; font-size: 0.95rem;">Transactions execute in milliseconds with optimized blockchain infrastructure for seamless trading.</p>
+                    <h3>Lightning Fast</h3>
+                    <p>Transactions execute in milliseconds with optimized blockchain infrastructure for seamless trading.</p>
                 </div>
             </div>
 
-            <!-- Multi-Chain Feature -->
             <div class="col-md-6 col-lg-4 mb-4">
-                <div style="background: white; border-radius: 12px; padding: 30px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); border: 1px solid #E2E8F0; transition: all 0.3s ease; height: 100%;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 15px 40px rgba(0, 0, 0, 0.12)'; this.style.borderColor='#3B82F6';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(0, 0, 0, 0.08)'; this.style.borderColor='#E2E8F0';">
-                    <div style="width: 60px; height: 60px; margin-bottom: 20px;">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" style="width: 100%; height: 100%; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));">
                             <defs>
                                 <linearGradient id="chainGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -983,16 +1364,14 @@
                             <line x1="42" y1="32" x2="54" y2="32" stroke="white" stroke-width="2"/>
                         </svg>
                     </div>
-                    <div style="width: 4px; height: 40px; background: linear-gradient(135deg, #3B82F6, #A855F7); border-radius: 2px; margin-bottom: 15px;"></div>
-                    <h3 style="font-size: 1.25rem; font-weight: 700; color: #0F172A; margin-bottom: 12px;">Multi-Chain Support</h3>
-                    <p style="color: #6B7280; line-height: 1.6; font-size: 0.95rem;">Seamlessly manage assets across Ethereum, Polygon, Solana, and 10+ major blockchain networks.</p>
+                    <h3>Multi-Chain Support</h3>
+                    <p>Seamlessly manage assets across Ethereum, Polygon, Solana, and 10+ major blockchain networks.</p>
                 </div>
             </div>
 
-            <!-- Wallet Feature -->
             <div class="col-md-6 col-lg-4 mb-4">
-                <div style="background: white; border-radius: 12px; padding: 30px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); border: 1px solid #E2E8F0; transition: all 0.3s ease; height: 100%;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 15px 40px rgba(0, 0, 0, 0.12)'; this.style.borderColor='#3B82F6';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(0, 0, 0, 0.08)'; this.style.borderColor='#E2E8F0';">
-                    <div style="width: 60px; height: 60px; margin-bottom: 20px;">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" style="width: 100%; height: 100%; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));">
                             <defs>
                                 <linearGradient id="walletGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -1006,16 +1385,14 @@
                             <rect x="8" y="14" width="32" height="6" rx="2" fill="url(#walletGrad1)"/>
                         </svg>
                     </div>
-                    <div style="width: 4px; height: 40px; background: linear-gradient(135deg, #3B82F6, #A855F7); border-radius: 2px; margin-bottom: 15px;"></div>
-                    <h3 style="font-size: 1.25rem; font-weight: 700; color: #0F172A; margin-bottom: 12px;">Wallet Integration</h3>
-                    <p style="color: #6B7280; line-height: 1.6; font-size: 0.95rem;">Connect your favorite wallets including MetaMask, WalletConnect, and hardware wallets in seconds.</p>
+                    <h3>Wallet Integration</h3>
+                    <p>Connect your favorite wallets including MetaMask, WalletConnect, and hardware wallets in seconds.</p>
                 </div>
             </div>
 
-            <!-- Support Feature -->
             <div class="col-md-6 col-lg-4 mb-4">
-                <div style="background: white; border-radius: 12px; padding: 30px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); border: 1px solid #E2E8F0; transition: all 0.3s ease; height: 100%;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 15px 40px rgba(0, 0, 0, 0.12)'; this.style.borderColor='#3B82F6';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(0, 0, 0, 0.08)'; this.style.borderColor='#E2E8F0';">
-                    <div style="width: 60px; height: 60px; margin-bottom: 20px;">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" style="width: 100%; height: 100%; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));">
                             <defs>
                                 <linearGradient id="supportGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -1029,9 +1406,8 @@
                             <path d="M40 40h8M44 36v8" stroke="white" stroke-width="2" stroke-linecap="round"/>
                         </svg>
                     </div>
-                    <div style="width: 4px; height: 40px; background: linear-gradient(135deg, #3B82F6, #A855F7); border-radius: 2px; margin-bottom: 15px;"></div>
-                    <h3 style="font-size: 1.25rem; font-weight: 700; color: #0F172A; margin-bottom: 12px;">24/7 Support</h3>
-                    <p style="color: #6B7280; line-height: 1.6; font-size: 0.95rem;">Expert support team available around the clock to help with any questions or technical issues.</p>
+                    <h3>24/7 Support</h3>
+                    <p>Expert support team available around the clock to help with any questions or technical issues.</p>
                 </div>
             </div>
         </div>
@@ -1040,18 +1416,23 @@
 
 <section class="transactions-section" id="transactions">
     <div class="container">
-        <div class="row justify-content-center mb-5">
-            <div class="col-lg-8 text-center">
-                <h2 style="font-size: 2.5rem; font-weight: 800; color: #0F172A; margin-bottom: 20px;">Live Activity</h2>
-                <p style="font-size: 1.1rem; color: #475569;">Real-time transaction updates from our platform</p>
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center section-head">
+                <span class="section-kicker justify-content-center">Activity Feed</span>
+                <h2>Live Activity</h2>
+                <p>A clean operational view of recent platform movement, presented without the noise.</p>
             </div>
         </div>
         <div class="row justify-content-center">
             <div class="col-12 col-lg-10">
-                <div class="card shadow-lg" style="border: 1px solid #E2E8F0; border-radius: 12px;">
+                <div class="transactions-shell">
                     <div class="card-header text-white d-flex align-items-center" style="padding: 18px 24px;">
                         <i class="fas fa-circle-check me-2"></i>
                         <h5 class="mb-0" style="font-weight: 700;">Transaction History</h5>
+                    </div>
+                    <div class="transactions-meta">
+                        <span>Sample activity generated to demonstrate the dashboard interface.</span>
+                        <span class="status-chip">Stable feed</span>
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive">
