@@ -77,6 +77,58 @@
       animation: fadeInUp 0.8s ease-out;
     }
 
+    /* Hero Row Alignment */
+    .hero .row {
+      align-items: stretch;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .hero .col-lg-6 {
+      padding: 0;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero .col-lg-6:first-child {
+      padding-right: 20px;
+    }
+
+    .hero .col-lg-6:last-child {
+      padding-left: 0;
+    }
+
+    @media (min-width: 768px) {
+      .hero .col-lg-6 {
+        padding: 0 20px;
+        margin-bottom: 0;
+      }
+
+      .hero .col-lg-6:first-child {
+        padding-right: 30px;
+      }
+
+      .hero .col-lg-6:last-child {
+        padding-left: 30px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .hero .col-lg-6 {
+        padding: 0 40px;
+      }
+
+      .hero .col-lg-6:first-child {
+        padding-right: 60px;
+      }
+
+      .hero .col-lg-6:last-child {
+        padding-left: 60px;
+      }
+    }
+
     .hero h1 {
       font-size: 2rem;
       font-weight: 800;
@@ -573,14 +625,22 @@
       background: linear-gradient(135deg, white 0%, #F9FAFB 100%);
       border: 1px solid #E5E7EB;
       border-radius: 12px;
-      padding: 20px;
+      padding: 0;
       animation: fadeInUp 0.8s ease-out 0.2s both;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-      overflow-x: auto;
-      scroll-behavior: smooth;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin: 0 auto;
     }
 
     .analytics-diagram svg {
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+      display: block;
       filter: drop-shadow(0 2px 8px rgba(59, 130, 246, 0.1));
       transition: filter 0.3s ease;
     }
@@ -601,14 +661,13 @@
 
     @media (min-width: 768px) {
       .analytics-diagram {
-        padding: 32px;
-        margin-bottom: 0;
+        min-height: 450px;
       }
     }
 
     @media (min-width: 1024px) {
       .analytics-diagram {
-        padding: 40px;
+        min-height: 520px;
       }
     }
 
