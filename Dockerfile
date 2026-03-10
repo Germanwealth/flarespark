@@ -19,16 +19,10 @@ RUN apk add --no-cache \
 RUN docker-php-ext-configure gd --with-jpeg --with-webp \
     && docker-php-ext-install -j$(nproc) \
     gd \
-    pdo \
     pdo_pgsql \
     bcmath \
-    ctype \
     curl \
-    dom \
-    fileinfo \
-    mbstring \
-    tokenizer \
-    xml
+    mbstring
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
