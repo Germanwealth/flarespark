@@ -50,17 +50,25 @@ RUN composer install \
 # ===== Production Stage =====
 FROM php:8.2-fpm-alpine
 
-# Install runtime dependencies only
+# Install dependencies (both runtime and dev for extensions)
 RUN apk add --no-cache \
     postgresql-libs \
+    postgresql-dev \
     libpng \
+    libpng-dev \
     libjpeg-turbo \
+    libjpeg-turbo-dev \
     libwebp \
+    libwebp-dev \
     zlib \
+    zlib-dev \
     libxml2 \
+    libxml2-dev \
     curl \
     supervisor \
-    nginx
+    nginx \
+    build-base \
+    autoconf
 
 # Install PHP extensions
 RUN docker-php-ext-configure gd --with-jpeg --with-webp \
@@ -77,6 +85,17 @@ RUN docker-php-ext-configure gd --with-jpeg --with-webp \
     mbstring \
     tokenizer \
     xml
+
+# Remove build dependencies to keep image small
+RUN apk del --no-cache \
+    build-base \
+    autoconf \
+    postgresql-dev \
+    libpng-dev \
+    libjpeg-turbo-dev \
+    libwebp-dev \
+    zlib-dev \
+    libxml2-dev
 
 # Configure PHP for production
 RUN echo "memory_limit = 256M" > /usr/local/etc/php/conf.d/production.ini && \
