@@ -4,7 +4,6 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InvestmentController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\WalletController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -23,5 +22,7 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/connect', [WalletController::class, 'index'])->name('connect');
-Route::post('/connect', [WalletController::class, 'connect'])->name('connect.submit');
+// Health check endpoint for monitoring
+Route::get('/health', function () {
+    return response()->json(['status' => 'ok'], 200);
+});
