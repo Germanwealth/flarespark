@@ -8,6 +8,7 @@ RUN apk add --no-cache \
     libpng-dev \
     libjpeg-turbo-dev \
     libwebp-dev \
+    oniguruma-dev \
     zlib-dev \
     libxml2-dev \
     curl-dev \
@@ -55,6 +56,7 @@ RUN apk add --no-cache \
     libpng \
     libjpeg-turbo \
     libwebp \
+    oniguruma \
     zlib \
     libxml2 \
     curl \
