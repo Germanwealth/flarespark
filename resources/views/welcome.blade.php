@@ -4,6 +4,47 @@
 
 @section('styles')
 <style>
+    /* ANIMATIONS */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes glow {
+      0%, 100% {
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+      }
+      50% {
+        box-shadow: 0 0 40px rgba(59, 130, 246, 0.8);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
     /* MOBILE FIRST - Default for small screens */
     .hero {
       background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #334155 100%);
@@ -26,12 +67,14 @@
       bottom: 0;
       background: radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 40%),
                   radial-gradient(circle at 20% 80%, rgba(168, 85, 247, 0.1) 0%, transparent 40%);
+      animation: float 6s ease-in-out infinite;
     }
 
     .hero-content { 
       position: relative; 
       z-index: 1;
       width: 100%;
+      animation: fadeInUp 0.8s ease-out;
     }
 
     .hero h1 {
@@ -43,6 +86,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      letter-spacing: -0.02em;
     }
 
     .hero p {
@@ -51,6 +95,7 @@
       opacity: 0.9;
       line-height: 1.8;
       color: #CBD5E1;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
     }
 
     /* Tablet and larger screens */
@@ -100,6 +145,7 @@
       font-size: 0.95rem;
       width: 100%;
       text-align: center;
+      animation: fadeInUp 0.8s ease-out 0.3s both;
     }
 
     .btn-primary-hero:hover {
@@ -123,6 +169,7 @@
       font-size: 0.95rem;
       width: 100%;
       text-align: center;
+      animation: fadeInUp 0.8s ease-out 0.4s both;
     }
 
     /* Tablet and larger */
@@ -147,12 +194,25 @@
       background: #1E293B;
       color: #F8FAFC;
       border-color: #CBD5E1;
+      transform: translateY(-3px);
     }
 
     /* FEATURES/BASIC SECTION - MOBILE FIRST */
     .basic-1 {
       padding: 40px 20px;
-      background: #F8FAFC;
+      background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
+      position: relative;
+    }
+
+    .basic-1::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 40% 60%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
+      pointer-events: none;
     }
 
     .basic-1 h2 {
@@ -161,6 +221,13 @@
       margin-bottom: 25px;
       color: #0F172A;
       text-align: center;
+      background: linear-gradient(135deg, #0F172A 0%, #334155 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+      z-index: 1;
+      animation: fadeInUp 0.8s ease-out;
     }
 
     .basic-1 p {
@@ -168,6 +235,9 @@
       color: #475569;
       line-height: 1.9;
       margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+      animation: fadeInUp 0.8s ease-out 0.1s both;
     }
 
     /* Tablet screens */
@@ -201,10 +271,87 @@
       }
     }
 
+    /* FEATURE CARDS */
+    .feature-card {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      border: 1px solid #E2E8F0;
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.8s ease-out both;
+    }
+
+    .feature-card:nth-child(1) { animation-delay: 0.2s; }
+    .feature-card:nth-child(2) { animation-delay: 0.3s; }
+    .feature-card:nth-child(3) { animation-delay: 0.4s; }
+    .feature-card:nth-child(4) { animation-delay: 0.5s; }
+
+    .feature-card:hover {
+      box-shadow: 0 12px 30px rgba(59, 130, 246, 0.15);
+      transform: translateY(-8px);
+      border-color: #3B82F6;
+    }
+
+    .feature-card h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #0F172A;
+      margin-bottom: 12px;
+    }
+
+    .feature-card p {
+      font-size: 0.95rem;
+      color: #475569;
+      line-height: 1.7;
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+      color: white;
+      font-size: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .feature-card {
+        padding: 32px;
+        margin-bottom: 0;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-12px);
+      }
+
+      .feature-icon {
+        width: 56px;
+        height: 56px;
+        font-size: 1.75rem;
+      }
+    }
+
     /* TRANSACTIONS SECTION - MOBILE FIRST */
     .transactions-section {
       background: white;
       padding: 40px 20px;
+      position: relative;
+    }
+
+    .transactions-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #3B82F6 0%, #2563EB 50%, #3B82F6 100%);
     }
 
     .card-header {
@@ -421,6 +568,70 @@
       }
     }
 
+    /* SVG ANALYTICS DIAGRAM */
+    .analytics-diagram {
+      background: linear-gradient(135deg, white 0%, #F9FAFB 100%);
+      border: 1px solid #E5E7EB;
+      border-radius: 12px;
+      padding: 20px;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      overflow-x: auto;
+      scroll-behavior: smooth;
+    }
+
+    .analytics-diagram svg {
+      filter: drop-shadow(0 2px 8px rgba(59, 130, 246, 0.1));
+      transition: filter 0.3s ease;
+    }
+
+    .analytics-diagram:hover svg {
+      filter: drop-shadow(0 4px 12px rgba(59, 130, 246, 0.2));
+    }
+
+    .analytics-diagram svg circle {
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    .analytics-diagram svg polyline {
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      animation: slideInRight 0.8s ease-out 0.3s both;
+    }
+
+    @media (min-width: 768px) {
+      .analytics-diagram {
+        padding: 32px;
+        margin-bottom: 0;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .analytics-diagram {
+        padding: 40px;
+      }
+    }
+
+    /* SECTION SEPARATORS */
+    .section-divider {
+      height: 2px;
+      background: linear-gradient(90deg, transparent 0%, #E2E8F0 50%, transparent 100%);
+      margin: 40px 0;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    @media (min-width: 768px) {
+      .section-divider {
+        margin: 60px 0;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .section-divider {
+        margin: 80px 0;
+      }
+    }
+
 </style>
 @endsection
 
@@ -443,7 +654,8 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <svg class="img-fluid rounded-3" viewBox="0 0 520 420" style="box-shadow: 0 20px 60px rgba(0,0,0,0.2); background: linear-gradient(135deg, #1E293B 0%, #334155 100%); border-radius: 12px;" xmlns="http://www.w3.org/2000/svg">
+                <div class="analytics-diagram">
+                    <svg class="img-fluid rounded-3" viewBox="0 0 520 420" style="box-shadow: 0 20px 60px rgba(0,0,0,0.2); background: linear-gradient(135deg, #1E293B 0%, #334155 100%); border-radius: 12px;" xmlns="http://www.w3.org/2000/svg">
                     <!-- Grid background -->
                     <defs>
                         <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
@@ -499,6 +711,7 @@
                         <text x="140" y="65" font-size="11" fill="#10B981">+2.3% Today</text>
                     </g>
                 </svg>
+                </div>
             </div>
         </div>
     </div>
