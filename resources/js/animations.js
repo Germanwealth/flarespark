@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  console.log('✨ Page animations initialized - PRISM Platform');
+  console.log('Page animations initialized - cryptorank');
 });
 
 // Enhance button ripple effect on click

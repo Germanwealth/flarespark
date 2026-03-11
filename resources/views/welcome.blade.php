@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'PRISM | Live Forex, Crypto, and Airdrop Intelligence')
+@section('title', 'cryptorank | Live Forex, Crypto, and Airdrop Intelligence')
 
 @section('styles')
 <style>
@@ -667,7 +667,7 @@
                     <span class="eyebrow">Real-time market room</span>
                     <h1>Forex flow, crypto tape, and airdrop radar in one screen.</h1>
                     <p class="hero-copy">
-                        PRISM now opens like a live dealing desk. Visitors see streaming forex pairs, crypto movers,
+                        cryptorank now opens like a live dealing desk. Visitors see streaming forex pairs, crypto movers,
                         fast exchange-rate snapshots, and high-attention airdrop opportunities without the page feeling flat or fake.
                     </p>
                     <div class="hero-actions">
@@ -698,7 +698,7 @@
                     <div class="terminal-card">
                         <div class="terminal-topbar">
                             <div class="terminal-dots"><span></span><span></span><span></span></div>
-                            <span class="terminal-badge">PRISM terminal / BTCUSD</span>
+                            <span class="terminal-badge">cryptorank terminal / BTCUSD</span>
                         </div>
                         <div class="macro-price">
                             <div>

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="PRISM - Advanced Crypto Asset Management Platform">
-    <title>@yield('title', 'PRISM - Dashboard')</title>
+    <meta name="description" content="cryptorank - Live crypto, forex, exchange rates, and airdrop intelligence">
+    <title>@yield('title', 'cryptorank - Dashboard')</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -213,7 +213,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 PRISM. All rights reserved.</p>
+                <p>&copy; 2026 cryptorank. All rights reserved.</p>
             </div>
         </div>
     </footer>

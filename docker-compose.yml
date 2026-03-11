@@ -29,7 +29,7 @@ services:
     restart: unless-stopped
     working_dir: /var/www/html
     environment:
-      APP_NAME: ${APP_NAME:-FlareSpark}
+      APP_NAME: ${APP_NAME:-cryptorank}
       APP_ENV: ${APP_ENV:-production}
       APP_DEBUG: ${APP_DEBUG:-false}
       APP_KEY: ${APP_KEY}

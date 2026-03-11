@@ -3,7 +3,7 @@ builder = "dockerfile"
 buildCommand = "docker build -t flarespark:latest ."
 
 [env]
-APP_NAME = "FlareSpark"
+APP_NAME = "cryptorank"
 APP_ENV = "production"
 APP_DEBUG = "false"
 LOG_CHANNEL = "stack"
@@ -12,7 +12,7 @@ CACHE_DRIVER = "file"
 QUEUE_CONNECTION = "sync"
 SESSION_DRIVER = "file"
 SESSION_LIFETIME = "120"
-VITE_APP_NAME = "FlareSpark"
+VITE_APP_NAME = "cryptorank"
 
 [deploy]
 startCommand = "supervisord -c /etc/supervisord.conf"
