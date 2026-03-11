@@ -11,7 +11,7 @@
                 <li class="nav-item"><a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a></li>
                 <li class="nav-item"><a class="nav-link" href="/connect">Connect Wallet</a></li>
                 <li class="nav-item"><a class="nav-link" href="/investments">Investments</a></li>
-                
+
                 @auth
                     <li class="nav-item">
                         <span class="nav-link">Welcome, {{ Auth::user()->name }}</span>

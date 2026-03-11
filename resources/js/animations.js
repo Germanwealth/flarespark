@@ -119,7 +119,7 @@ document.addEventListener('click', function(e) {
     const rect = btn.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    
+
     // Create ripple element
     const ripple = document.createElement('span');
     ripple.style.position = 'absolute';
@@ -131,7 +131,7 @@ document.addEventListener('click', function(e) {
     ripple.style.borderRadius = '50%';
     ripple.style.pointerEvents = 'none';
     ripple.style.animation = 'ripple 0.6s ease-out';
-    
+
     // Only add ripple if button doesn't already have position style
     if (window.getComputedStyle(btn).position === 'static') {
       btn.style.position = 'relative';

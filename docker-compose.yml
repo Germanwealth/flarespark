@@ -34,34 +34,34 @@ services:
       APP_DEBUG: ${APP_DEBUG:-false}
       APP_KEY: ${APP_KEY}
       APP_URL: ${APP_URL:-http://localhost:8000}
-      
+
       DB_CONNECTION: ${DB_CONNECTION:-pgsql}
       DB_HOST: ${DB_HOST:-postgres}
       DB_PORT: ${DB_PORT:-5432}
       DB_DATABASE: ${DB_DATABASE:-railway}
       DB_USERNAME: ${DB_USERNAME:-postgres}
       DB_PASSWORD: ${DB_PASSWORD:-secret}
-      
+
       LOG_CHANNEL: ${LOG_CHANNEL:-stack}
       LOG_LEVEL: ${LOG_LEVEL:-debug}
       CACHE_DRIVER: ${CACHE_DRIVER:-file}
       QUEUE_CONNECTION: ${QUEUE_CONNECTION:-sync}
       SESSION_DRIVER: ${SESSION_DRIVER:-file}
-      
+
       DB_SEED: "true"
-    
+
     volumes:
       - .:/var/www/html
       - ./storage:/var/www/html/storage
       - ./bootstrap/cache:/var/www/html/bootstrap/cache
-    
+
     ports:
       - "8080:8080"
-    
+
     depends_on:
       postgres:
         condition: service_healthy
-    
+
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
       interval: 30s
