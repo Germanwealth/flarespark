@@ -4,6 +4,8 @@ FROM php:8.2-fpm-alpine AS builder
 # Install system dependencies
 RUN apk add --no-cache \
     build-base \
+    nodejs \
+    npm \
     postgresql-dev \
     libpng-dev \
     libjpeg-turbo-dev \
@@ -42,6 +44,16 @@ RUN composer install \
     --prefer-dist \
     --optimize-autoloader
 
+# Copy frontend build files
+COPY package.json package-lock.json* ./
+COPY vite.config.js ./
+COPY resources ./resources
+COPY public ./public
+COPY tailwind.config.js postcss.config.js* ./
+
+# Build frontend assets
+RUN npm install && npm run build
+
 # ===== Production Stage =====
 FROM php:8.2-fpm-alpine
 
@@ -73,6 +85,7 @@ WORKDIR /var/www/html
 
 # Copy application files from builder
 COPY --from=builder /var/www/html/vendor ./vendor
+COPY --from=builder /var/www/html/public/build ./public/build
 COPY --chown=www-data:www-data . .
 
 # Create necessary directories with proper permissions
