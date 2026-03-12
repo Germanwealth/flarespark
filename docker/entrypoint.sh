@@ -11,11 +11,9 @@ fi
 echo "📦 Running database migrations..."
 php artisan migrate --force
 
-# Seed database if needed
-if [ "$DB_SEED" = "true" ]; then
-    echo "🌱 Seeding database..."
-    php artisan db:seed --force
-fi
+# Seed database
+echo "🌱 Seeding database..."
+php artisan db:seed --force
 
 # Cache routes, config, and views for production
 echo "⚡ Caching configuration..."
