@@ -306,9 +306,9 @@
                         @csrf
                         <div class="mb-3">
                             <label for="reply" class="form-label">Message</label>
-                            <textarea 
-                                name="reply" 
-                                id="reply" 
+                            <textarea
+                                name="reply"
+                                id="reply"
                                 class="form-control @error('reply') is-invalid @enderror"
                                 placeholder="Type your reply here..."
                                 required></textarea>

@@ -368,10 +368,10 @@
 
                     <div class="form-group">
                         <label for="transaction_hash" class="form-label">Transaction Hash</label>
-                        <input 
-                            type="text" 
-                            name="transaction_hash" 
-                            id="transaction_hash" 
+                        <input
+                            type="text"
+                            name="transaction_hash"
+                            id="transaction_hash"
                             class="form-control @error('transaction_hash') is-invalid @enderror"
                             value="{{ $transaction->transaction_hash }}"
                             placeholder="Blockchain transaction hash">
@@ -382,9 +382,9 @@
 
                     <div class="form-group">
                         <label for="notes" class="form-label">Notes</label>
-                        <textarea 
-                            name="notes" 
-                            id="notes" 
+                        <textarea
+                            name="notes"
+                            id="notes"
                             class="form-control @error('notes') is-invalid @enderror"
                             placeholder="Additional notes about this transaction...">{{ $transaction->notes }}</textarea>
                         @error('notes')
