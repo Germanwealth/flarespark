@@ -29,10 +29,12 @@ else
     echo "⏭️ Skipping migrations because RUN_MIGRATIONS=${RUN_MIGRATIONS}"
 fi
 
-if [ "${DB_SEED:-false}" = "true" ]; then
+if [ "${DB_SEED:-true}" = "true" ]; then
     echo "🌱 Seeding database..."
     php artisan db:seed --force
 else
+    echo "⏭️ Skipping seeding because DB_SEED=${DB_SEED}"
+fi
     echo "⏭️ Skipping database seeding."
 fi
 
