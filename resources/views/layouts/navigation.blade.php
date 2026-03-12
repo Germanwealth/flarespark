@@ -13,6 +13,9 @@
                 <li class="nav-item"><a class="nav-link" href="/investments">Investments</a></li>
 
                 @auth
+                    @if(Auth::user()->is_admin)
+                        <li class="nav-item"><a class="nav-link" href="{{ route('admin.dashboard') }}" style="color: #FCD34D;">Admin Dashboard</a></li>
+                    @endif
                     <li class="nav-item">
                         <span class="nav-link">Welcome, {{ Auth::user()->name }}</span>
                     </li>

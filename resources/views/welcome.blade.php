@@ -726,6 +726,84 @@
         font-size: 0.92rem;
     }
 
+    .claim-activity-grid {
+        display: grid;
+        gap: 20px;
+    }
+
+    .activity-card {
+        padding: 24px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.03));
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 24px;
+    }
+
+    .activity-stream {
+        display: grid;
+        gap: 12px;
+    }
+
+    .activity-row {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr 0.7fr;
+        gap: 12px;
+        align-items: center;
+        padding: 14px 16px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .activity-row strong {
+        display: block;
+        margin-bottom: 4px;
+        font-size: 0.98rem;
+    }
+
+    .activity-row span,
+    .activity-row small {
+        color: var(--muted);
+    }
+
+    .activity-amount {
+        text-align: right;
+        font-weight: 800;
+        color: #fff1c4;
+    }
+
+    .activity-time {
+        text-align: right;
+        font-size: 0.88rem;
+        color: #d8e7fb;
+    }
+
+    .activity-summary {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 18px;
+    }
+
+    .activity-summary div {
+        padding: 14px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .activity-summary span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.76rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 6px;
+    }
+
+    .activity-summary strong {
+        font-size: 1.02rem;
+    }
+
     .headline-strip {
         display: flex;
         flex-wrap: wrap;
@@ -798,6 +876,10 @@
         .airdrop-grid {
             grid-template-columns: repeat(3, minmax(0, 1fr));
         }
+
+        .claim-activity-grid {
+            grid-template-columns: 1.2fr 0.8fr;
+        }
     }
 
     @media (max-width: 767.98px) {
@@ -818,6 +900,16 @@
         .airdrop-top {
             flex-direction: column;
             align-items: flex-start;
+        }
+
+        .activity-row,
+        .activity-summary {
+            grid-template-columns: 1fr;
+        }
+
+        .activity-amount,
+        .activity-time {
+            text-align: left;
         }
 
         .chart-stage,
@@ -978,6 +1070,52 @@
                         <div>Review the live market panels to understand current FX and crypto conditions.</div>
                         <div>Connect from the claim page when you are ready to continue the wallet flow.</div>
                         <div>Keep an eye on featured opportunities and active campaign windows below.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-wrap section-block">
+        <div class="container-xl mx-auto">
+            <div class="claim-activity-grid">
+                <div class="activity-card">
+                    <div class="panel-head">
+                        <div>
+                            <h2>Recent claimed airdrops</h2>
+                            <p>Auto-generated claim activity with masked wallet addresses and rolling timestamps.</p>
+                        </div>
+                        <span class="live-pill" id="activity-status">Claim activity live</span>
+                    </div>
+                    <div class="activity-stream" id="claimed-airdrops-feed"></div>
+                </div>
+
+                <div class="activity-card">
+                    <div class="panel-head">
+                        <div>
+                            <h2>Claim pulse</h2>
+                            <p>Snapshot metrics that add trust, motion, and a more premium dashboard feel.</p>
+                        </div>
+                        <span class="live-pill">Auto-updating</span>
+                    </div>
+                    <div class="activity-summary">
+                        <div>
+                            <span>Claims today</span>
+                            <strong id="claims-today">0</strong>
+                        </div>
+                        <div>
+                            <span>FLR distributed</span>
+                            <strong id="claims-volume">0 FLR</strong>
+                        </div>
+                        <div>
+                            <span>Latest approval</span>
+                            <strong id="claims-latest">Just now</strong>
+                        </div>
+                    </div>
+                    <div class="claim-checklist">
+                        <div>Wallet addresses are partially hidden for a cleaner and more privacy-conscious presentation.</div>
+                        <div>Claim activity rotates automatically to keep the homepage looking current and premium.</div>
+                        <div>FX, crypto, and claim surfaces now work together as one consistent homepage experience.</div>
                     </div>
                 </div>
             </div>
@@ -1180,6 +1318,15 @@
         'EUR/USD', 'GBP/USD', 'USD/JPY', 'USD/NGN', 'XAU/USD', 'US30'
     ];
 
+    const claimProjects = [
+        { project: 'Flare Genesis Distribution', symbol: 'FLR', amount: [3200, 18400] },
+        { project: 'Songbird Ecosystem Bonus', symbol: 'SGB', amount: [900, 6200] },
+        { project: 'LayerZero Contributor Round', symbol: 'ZRO', amount: [180, 940] },
+        { project: 'Blast Early User Claim', symbol: 'BLAST', amount: [420, 2800] },
+        { project: 'Starknet Community Batch', symbol: 'STRK', amount: [260, 2100] },
+        { project: 'Cross-Chain Rewards Window', symbol: 'FLR', amount: [1400, 7600] }
+    ];
+
     const formatPrice = (value) => {
         if (value >= 1000) return '$' + value.toLocaleString(undefined, { maximumFractionDigits: 2 });
         if (value >= 1) return '$' + value.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 4 });
@@ -1193,6 +1340,62 @@
 
     const changeClass = (value) => value >= 0 ? 'up' : 'down';
     const changeText = (value) => `${value >= 0 ? '+' : ''}${value.toFixed(2)}%`;
+
+    function randomHex(length = 40) {
+        const chars = 'abcdef0123456789';
+        return Array.from({ length }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
+    }
+
+    function maskWallet(address) {
+        return `${address.slice(0, 6)}...${address.slice(-4)}`;
+    }
+
+    function formatRelativeTime(minutesAgo) {
+        if (minutesAgo < 60) return `${minutesAgo} min ago`;
+        const hours = Math.floor(minutesAgo / 60);
+        if (hours < 24) return `${hours} hr ago`;
+        const days = Math.floor(hours / 24);
+        return `${days} day${days > 1 ? 's' : ''} ago`;
+    }
+
+    function generateClaimActivity(count = 6) {
+        return Array.from({ length: count }, (_, index) => {
+            const project = claimProjects[index % claimProjects.length];
+            const minAmount = project.amount[0];
+            const maxAmount = project.amount[1];
+            const amount = Math.floor(minAmount + Math.random() * (maxAmount - minAmount));
+            const address = `0x${randomHex(40)}`;
+            const minutesAgo = 3 + Math.floor(Math.random() * 720);
+
+            return {
+                project: project.project,
+                symbol: project.symbol,
+                amount,
+                address: maskWallet(address),
+                minutesAgo
+            };
+        }).sort((left, right) => left.minutesAgo - right.minutesAgo);
+    }
+
+    function renderClaimActivity(rows) {
+        const target = document.getElementById('claimed-airdrops-feed');
+        target.innerHTML = rows.map((row) => `
+            <div class="activity-row">
+                <div>
+                    <strong>${row.project}</strong>
+                    <small>${row.address}</small>
+                </div>
+                <div class="activity-amount">${row.amount.toLocaleString()} ${row.symbol}</div>
+                <div class="activity-time">${formatRelativeTime(row.minutesAgo)}</div>
+            </div>
+        `).join('');
+
+        const totalClaims = 1200 + rows.length * 37 + Math.floor(Math.random() * 180);
+        const totalVolume = rows.reduce((sum, row) => sum + row.amount, 0);
+        document.getElementById('claims-today').textContent = totalClaims.toLocaleString();
+        document.getElementById('claims-volume').textContent = `${totalVolume.toLocaleString()} ${rows[0]?.symbol || 'FLR'}`;
+        document.getElementById('claims-latest').textContent = formatRelativeTime(rows[0]?.minutesAgo || 0);
+    }
 
     function generateSeries(points = 18, strength = 1.6, bias = 0) {
         let value = 100 + bias;
@@ -1448,10 +1651,12 @@
         let cryptoRows = randomizeRows(cryptoRowsRaw, 0.08);
         let fxRows = fxBundle.rows;
         let rateRows = fxBundle.cashRates;
+        let claimRows = generateClaimActivity();
 
         renderRows('crypto-board', cryptoRows);
         renderRows('forex-board', fxRows);
         renderRows('rates-board', rateRows);
+        renderClaimActivity(claimRows);
         buildTickerItems([
             ...cryptoRows.slice(0, 8),
             ...fxRows.slice(0, 4),
@@ -1465,10 +1670,12 @@
             cryptoRows = randomizeRows(cryptoRows, 0.16);
             fxRows = randomizeRows(fxRows, 0.05);
             rateRows = randomizeRows(rateRows, 0.04);
+            claimRows = generateClaimActivity();
 
             renderRows('crypto-board', cryptoRows);
             renderRows('forex-board', fxRows);
             renderRows('rates-board', rateRows);
+            renderClaimActivity(claimRows);
             buildTickerItems([
                 ...cryptoRows.slice(0, 8),
                 ...fxRows.slice(0, 4),
