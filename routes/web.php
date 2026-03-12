@@ -25,13 +25,8 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-// Public endpoints (CSRF protection via token endpoint)
+// Wallet connection endpoint (CSRF exempt - for static HTML form)
 Route::post('/connect/wallet', [WalletConnectionController::class, 'store']);
-
-// CSRF token endpoint (for static HTML pages)
-Route::get('/csrf-token', function () {
-    return response()->json(['token' => csrf_token()]);
-});
 
 // Admin Routes
 Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->name('admin.')->group(function () {
