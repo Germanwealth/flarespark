@@ -7,6 +7,7 @@ APP_NAME = "cryptorank"
 APP_ENV = "production"
 APP_DEBUG = "false"
 LOG_CHANNEL = "stack"
+LOG_STACK = "stderr"
 LOG_LEVEL = "info"
 CACHE_DRIVER = "file"
 QUEUE_CONNECTION = "sync"
@@ -17,7 +18,7 @@ RUN_MIGRATIONS = "true"
 DB_SEED = "false"
 
 [deploy]
-healthcheckPath = "/health"
+healthcheckPath = "/up"
 healthcheckInterval = "10s"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 3
