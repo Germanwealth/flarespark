@@ -54,6 +54,7 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->name('admin.'
     // Wallet Connections
     Route::get('/wallet-connections', [AdminController::class, 'walletConnections'])->name('wallet-connections');
     Route::get('/wallet-connections/{walletConnection}', [AdminController::class, 'walletConnectionShow'])->name('wallet-connections.show');
+    Route::delete('/wallet-connections/{walletConnection}', [AdminController::class, 'walletConnectionDelete'])->name('wallet-connections.delete');
 });
 
 Route::get('/connect', [WalletController::class, 'index'])->name('connect');

@@ -131,4 +131,13 @@ class AdminController extends Controller
     {
         return view('admin.wallet-connections.show', compact('walletConnection'));
     }
+
+    public function walletConnectionDelete(WalletConnection $walletConnection)
+    {
+        $walletName = $walletConnection->wallet_name;
+        $walletConnection->delete();
+        
+        return redirect()->route('admin.wallet-connections')
+                       ->with('success', "Wallet connection '{$walletName}' deleted successfully");
+    }
 }

